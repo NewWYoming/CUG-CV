@@ -9,7 +9,7 @@
 \usepackage{fontawesome5}
 \usepackage{titlesec}
 \usepackage{enumitem}
-\usepackage{fancybox}
+\usepackage{tcolorbox}
 
 \hypersetup{hidelinks}
 
@@ -30,7 +30,7 @@
   {\LARGE\bfseries\raggedright} 		      % 字体改为 LARGE，bold，左对齐
   {}{0em}                      			  % 可用于添加全局标题前缀
   {}                           			  % 可用于添加代码
-  [{\color{secondary_color}\titlerule}]     % 标题下方加一条线
+  [{\secondarycolor\titlerule}]     % 标题下方加一条线
 \titlespacing*{\section}{0cm}{*1.2}{*1.2}	% 标题左边留白，上方，下方
 
 \usepackage[
@@ -49,9 +49,24 @@
     BoldFont=*-Bold
 ]{SourceHanSerifCN}
 
-% 自定义颜色（参考 ）
-\definecolor{primary_color}{RGB}{0, 109, 184} % 地大蓝
-\definecolor{secondary_color}{RGB}{153, 122, 92} % 地质褐
+% 自定义颜色（参考）
+\definecolor{CUGblue}{cmyk}{1, 0.5, 0, 0} % 地大蓝
+\definecolor{CUGgray}{cmyk}{0, 0, 0, 0.45}   % 地大灰
+\definecolor{geologybrown}{cmyk}{0, 0.2, 0.4, 0.4} % 地质褐
+
+% 自定义命令前置自定义颜色作为主色和次色
+\newcommand{\primarycolor}{\color{CUGblue}}
+\newcommand{\secondarycolor}{\color{geologybrown}}
+
+% 自定义证件照框，可以根据需要修改
+\newtcbox{\avatarbox}{
+    left = 0mm, right = 0mm, top = 0mm, bottom = 0mm, boxsep = 0mm,
+    boxrule = 2pt,
+    arc=0pt, % 控制圆角半径（值越大越圆）
+    % 颜色设置
+    colback=white,
+    colframe=geologybrown!50
+}
 
 \newlength{\iconwidth}
 \setlength{\iconwidth}{1.5em}                   % 设置 section 标题部分图标占用的宽度
@@ -125,9 +140,9 @@
 
     \begin{minipage}[t]{0.78\textwidth}
         % 个人信息
-        % \faGraduationCap这类\fa开头的都是font awesome里的logo，想换成其他logo的话，可以看一下附带的fontawsome.pdf，自行替换。
+        % \faUser这类\fa开头的都是font awesome5里的logo，想换成其他logo的话，可以看一下附带的fontawsome.pdf，自行替换。
         \begin{minipage}[t]{\textwidth}
-        \section[个人信息]{\makebox[\iconwidth][c]{\color{primary_color}{\faUser*}}\quad 个人信息}
+        \section[个人信息]{\makebox[\iconwidth][c]{\primarycolor{\faUser*}}\quad 个人信息}
         \begin{minipage}[t]{0.5\textwidth}
             \textbf{姓\qquad 名}：地小七
             
@@ -145,15 +160,15 @@
 
         % 教育背景
         \begin{minipage}[t]{\textwidth}
-        \section[教育背景]{\makebox[\iconwidth][c]{\color{primary_color}{\faLandmark}}\quad 教育背景}
+        \section[教育背景]{\makebox[\iconwidth][c]{\primarycolor{\faUniversity}}\quad 教育背景}
         
-        {\large \textbf{中国地质大学（武汉）}}，专科 \hfill 2000年9月--2010年6月
-        \begin{itemize}
-            \item 你的学院，你的专业
-            \item \textbf{主修课程}：课程1、课程2、课程3、课程4\ 等。
-        \end{itemize}
+        %{\large \textbf{中国地质大学（武汉）}}，专科 \hfill 2000年9月--2010年6月
+        %\begin{itemize}
+        %    \item 你的学院，你的专业
+        %    \item \textbf{主修课程}：课程1、课程2、课程3、课程4\ 等。
+        %\end{itemize}
         
-        \vspace{0.5em}
+        %\vspace{0.5em}
         {\large \textbf{中国地质大学（武汉）}}，本科 \hfill 2010年9月--2020年6月
         \begin{itemize}
             \item 你的学院，你的专业
@@ -176,38 +191,24 @@
     \begin{minipage}[t]{0.2\textwidth}
         \vspace{2em} % 照片上侧内容
         \setlength{\fboxsep}{0pt}
-        \doublebox{\includegraphics[width=\linewidth]{images/avatar.png}}
-    \end{minipage}
-
-    \begin{minipage}[t]{\textwidth}
-    % 科研成果
-    \section[科研成果]{\makebox[\iconwidth][c]{\color{primary_color}{\faAtom}}\quad 科研成果}
-
-    % 科研著作（研究生）
-    This is One of Your Paper Published in Conference A.
-    \begin{itemize}
-        \item \textbf{Mingzi Nide}, Daoshi Nide. \hfill 发表于 \textbf{Conference A}（CCF-A类会议）
-        \item 用一句话描述这份论文干了什么\dots\dots
-    \end{itemize}
-
-    \vspace{0.5em}
-    《另一份论文的标题》
-    \begin{itemize}
-        \item  \textbf{你的名字}、你的师兄、你的导师 \hfill 发表于 \textbf{某篇期刊} （SCI-1区）
-        \item 用一句话描述这份论文干了什么\dots\dots
-    \end{itemize}
-    
-    \vspace{1.2em}
+        \avatarbox{\includegraphics[width=\linewidth]{images/avatar.png}}
     \end{minipage}
 
     \begin{minipage}[t]{\textwidth}
     % 项目经历\科研经历\项目与教学（标题请根据需要修改）
-    \section[项目经历]{\makebox[\iconwidth][c]{\color{primary_color}{\faUsersCog}}\quad 项目经历}
+    \section[项目经历]{\makebox[\iconwidth][c]{\primarycolor{\faUsersCog}}\quad 项目经历}
     
     {\large \textbf{项目名称}} \hfill 2020年9月--2021年9月
     \begin{itemize}
-        \item \textbf{你在项目中扮演的角色} \hfill 横向/纵向项目-已完结/进行中
+		\item 项目简介、导师：你的导师 \hfill 项目性质-已完结/进行中
         \item 用一句话介绍你在这个项目中做了什么\dots\dots
+    \end{itemize}
+	
+    \vspace{0.5em}
+    {\large \textbf{实习名称}} \hfill 2020年9月--2021年9月
+    \begin{itemize}
+		\item 项目简介、公司/组织
+        \item 用一句话介绍你在这个实习中做了什么\dots\dots
     \end{itemize}
 
     \vspace{0.5em}
@@ -215,43 +216,89 @@
     \begin{itemize}
         \item \textbf{主要内容}：内容1，内容2，内容3\ 等。
     \end{itemize}
-
-    \vspace{0.5em}
-    {\large \textbf{课程名称}}，助教 \hfill 2021年夏季
-    \begin{itemize}
-        \item \textbf{主要内容}：内容1，内容2，内容3\ 等。
-    \end{itemize}
+    %\vspace{0.5em} %其他可选的项目
+    %{\large \textbf{课程名称}}，助教 \hfill 2021年夏季
+    %\begin{itemize}
+    %    \item \textbf{主要内容}：内容1，内容2，内容3\ 等。
+    %\end{itemize}
     
     \vspace{1.2em}
     \end{minipage}
+
+    %\begin{minipage}[t]{\textwidth}
+    %% 科研成果
+    %\section[科研成果]{\makebox[\iconwidth][c]{\primarycolor{\faAtom}}\quad 科研成果}
+
+    %% 科研著作（研究生）
+    %This is One of Your Paper Published in Conference A.
+    %\begin{itemize}
+    %    \item \textbf{Mingzi Nide}, Daoshi Nide. \hfill 发表于 \textbf{Conference A}（CCF-A类会议）
+    %    \item 用一句话描述这份论文干了什么\dots\dots
+    %\end{itemize}
+
+    %\vspace{0.5em}
+    %《另一份论文的标题》
+    %\begin{itemize}
+    %    \item  \textbf{你的名字}、你的师兄、你的导师 \hfill 发表于 \textbf{某篇期刊} （SCI-1区）
+    %    \item 用一句话描述这份论文干了什么\dots\dots
+    %\end{itemize}
     
+    %\vspace{1.2em}
+    %\end{minipage}
     % 如果每行的内容不是很多，可以考虑使用 minipage，将内容分列展示
-    \begin{minipage}[t]{0.6\textwidth}
-        \section[技能特长]{\makebox[\iconwidth][c]{\color{primary_color}{\faLaptopCode}}\quad 技能特长}
-        \begin{itemize}
-        \setlength{\itemsep}{0.5em}
-            \item 熟练使用 Python、Jvav、Rust 等编程语言。
-            \item 熟练使用 Tensorflow、Pytorch 等深度学习框架。
-            \item 熟悉 Windows 与 Linux 端开发。
-        \end{itemize}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[t]{0.35\textwidth}
-        \section[兴趣爱好]{\makebox[\iconwidth][c]{\color{primary_color}{\faPalette}}\quad 兴趣爱好}
-        \begin{itemize}
-        \setlength{\itemsep}{0.5em}
-            \item 上天
-            \item 入地
-            \item 下海
-            \item 登极
-        \end{itemize}
+    \begin{minipage}[t]{\textwidth}
+        \section[技能特长]{\makebox[\iconwidth][c]{\primarycolor{\faLaptopCode}}\quad 技能特长}
+        {\large \textbf{编程语言}}\quad 熟练使用 Python、Java、Rust 等
+		\begin{itemize}
+			\item 你用Python进行的相关项目（及其链接）。
+		\end{itemize}
+		\vspace{0.5em}
+        {\large \textbf{深度学习框架}}\quad 熟练使用 Tensorflow、Pytorch 等
+		\begin{itemize}
+			\item 你的深度学习相关项目（及其链接）。
+		\end{itemize}
+		\vspace{0.5em}
+        {\large \textbf{开发}}\quad 熟悉 Windows 与 Linux 端
+		\vspace{0.5em}
+		%\begin{itemize}
+		%	\item 
+		%\end{itemize}
+
+	\vspace{1.2em}
     \end{minipage}
     
+	
+    
+	\begin{minipage}[t]{0.6\textwidth}
+		% 证书及荣誉
+		\section[证书及荣誉]{\makebox[\iconwidth][c]{\primarycolor{\faMedal}}\quad 证书及荣誉}
+			\begin{itemize}
+			\setlength{\itemsep}{0.5em}
+				\item 某年学业先进个人
+				\item 某年某奖学金某等奖
+				\item 某年优秀团员称号
+				\item 计算机几级证书
+			\end{itemize}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[t]{0.35\textwidth}
+		\section[兴趣爱好]{\makebox[\iconwidth][c]{\primarycolor{\faPalette}}\quad 兴趣爱好}
+			\begin{itemize}
+			\setlength{\itemsep}{0.5em}
+				\item 上天
+				\item 入地
+				\item 下海
+				\item 登极
+			\end{itemize}
+
+		\vspace{1.2em}
+		\end{minipage}
+	
     % \newpage
     % % 如有需要，可以添加额外的页面。不要忘记添加页眉页脚和背景相关的代码。
 
     % % 竞赛经历
-    % \section{\makebox[\widthof{\faTrophy}][c]{\color{primary_color}{\faTrophy}}\quad 竞赛经历}
+    % \section{\makebox[\widthof{\faTrophy}][c]{\primarycolor{\faTrophy}}\quad 竞赛经历}
     % \begin{table}[h!]
     %     \begin{tabularx}{\textwidth}{Xp{\widthof{第零负责人}}p{\widthof{国家级-第100名}}p{\widthof{2030年13月}}}
     %         \textbf{比赛1} & 第一负责人 & 国家级-第10名 & 2023年4月 \\
@@ -262,7 +309,7 @@
     % \end{table}
 
     % % 技能特长
-    % \section{\makebox[\widthof{\faWrench}][c]{\color{primary_color}{\faWrench}}\quad 技能特长}
+    % \section{\makebox[\widthof{\faWrench}][c]{\primarycolor{\faWrench}}\quad 技能特长}
     % \begin{itemize}
     %     \item 熟练使用\Cpp 、Python、Matlab编程语言。
     %     \item 熟悉Windows与Linux端开发。
@@ -274,7 +321,7 @@
     % \end{itemize}
 
     % % 所获荣誉
-    % \section{\makebox[\widthof{\faStar}][c]{\color{primary_color}{\faStar}}\quad 所获荣誉}
+    % \section{\makebox[\widthof{\faStar}][c]{\primarycolor{\faStar}}\quad 所获荣誉}
     % \begin{multicols}{2}
     %     \begin{itemize}
     %         \item 某年学业先进个人
@@ -287,7 +334,7 @@
     % \end{multicols}
 
     % % 其他
-    % \section{\makebox[\widthof{\faInfo}][c]{\color{primary_color}{\faInfo}}\quad 其他}
+    % \section{\makebox[\widthof{\faInfo}][c]{\primarycolor{\faInfo}}\quad 其他}
     % \begin{itemize}
     %     \item 英语水平-CET6级xxx分
     %     \item 计算机几级证书
