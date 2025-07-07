@@ -17,6 +17,10 @@
 % 设置
 %%%%%%%%%%%%%%%%%%%%
 
+\newcommand{\mylarge}{\fontsize{18pt}{20pt}\selectfont} % 设置大号字体
+\newcommand{\mynormal}{\fontsize{12pt}{14pt}\selectfont} % 设置正常字体
+\newcommand{\mysmall}{\fontsize{10pt}{12pt}\selectfont} % 设置小号字体
+
 \setlength{\parindent}{0pt}					% 取消全局段落缩进
 \pagenumbering{gobble}						% 取消页码显示
 \setlist[itemize]{nosep                     % 取消 itemize 的默认间距
@@ -27,7 +31,7 @@
 \linespread{1.25}                           % 设置正文行间距
 
 \titleformat{\section}					    % 将原标题前面的数字取消了
-  {\LARGE\bfseries\raggedright} 		      % 字体改为 LARGE，bold，左对齐
+  {\Large\bfseries\raggedright} 		      % 字体改为 LARGE，bold，左对齐
   {}{0em}                      			  % 可用于添加全局标题前缀
   {}                           			  % 可用于添加代码
   [{\secondarycolor\titlerule}]     % 标题下方加一条线
@@ -76,7 +80,7 @@
 %%%%%%%%%%%%%%%%%%%%
 
 % 学院
-\newcommand{\school}{数学与物理学院 | School of Mathematics and Physics} 
+\newcommand{\school}{艰苦朴素学院 | School of Hardship and Frugality} 
 
 % 联系方式
 \newcommand{\contact}{
@@ -96,11 +100,8 @@
     }
 }
 
-\begin{document}
-
-    %%%%%%%%%%%%%%%%%%%%
-    % 页眉、页脚和背景（如果有多页简历，请把页眉页脚和背景复制粘贴到第二页的内容之前）
-    %%%%%%%%%%%%%%%%%%%%
+% 设定页面标题和页眉页脚
+\newcommand{\pageinit}{
 
     % 页眉：校标组合+学院名
     \begin{tikzpicture}[remember picture, overlay]
@@ -133,7 +134,12 @@
             \includegraphics[width=0.7\paperwidth, keepaspectratio]{images/logoblue.jpg}
         };
     \end{tikzpicture}
+}
 
+\begin{document}
+	
+    % 每页newpage要重新init
+	\pageinit
     %%%%%%%%%%%%%%%%%%%%
     % 简历正文
     %%%%%%%%%%%%%%%%%%%%
@@ -295,7 +301,7 @@
 		\end{minipage}
 	
     % \newpage
-    % % 如有需要，可以添加额外的页面。不要忘记添加页眉页脚和背景相关的代码。
+    % % 如有需要，可以添加额外的页面。不要忘记初始化页眉页脚
 
     % % 竞赛经历
     % \section{\makebox[\widthof{\faTrophy}][c]{\primarycolor{\faTrophy}}\quad 竞赛经历}
