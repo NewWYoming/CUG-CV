@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+\documentclass[11pt]{ctexart}
 
 \usepackage{hyperref}
 \usepackage{xcolor}
@@ -47,6 +47,11 @@
 ]{geometry}                                 % 页面边距设置
 
 % 字体设置
+\setCJKmainfont[
+    Path=./Fonts/CN/,
+    Extension=.otf,
+    BoldFont=*-Bold
+]{SourceHanSerifCN}
 \setmainfont[
     Path=./Fonts/CN/,
     Extension=.otf,
